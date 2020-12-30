@@ -15,7 +15,7 @@ etl_dir = 'Data/ETL'
 os.chdir(working_directory)
 
 """ How Does Performance Get Affected By The Defense They Are Playing """
-player_stats = pd.read_csv('player_stats.csv', index_col = 0)
+player_stats = pd.read_csv(data_dir + 'player_stats.csv', index_col = 0)
 
 """ OFFENSE QUARTERBACKS ETL """
 qb_yr_dfs = []
