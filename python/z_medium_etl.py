@@ -49,22 +49,23 @@ for yr in range(2002, 2021):
 
     yr_qb = yr_qb.fillna(0)
     
-    yr_qb['Qb_PcRank3'] = yr_qb['Pc_pg3'].rank(method='min')
-    yr_qb['Qb_PaRank3'] = yr_qb['Pa_pg3'].rank(method='min')
-    yr_qb['Qb_PcpRank3'] = yr_qb['Pc%3'].rank(method='min')
-    yr_qb['Qb_PyRank3'] = yr_qb['Py_pg3'].rank(method='min')
-    yr_qb['Qb_PyaRank3'] = yr_qb['Pya3'].rank(method='min')
-    yr_qb['Qb_TDpRank3'] = yr_qb['Ptd_pg3'].rank(method='min')
-    yr_qb['Qb_IntRank3'] = yr_qb['Int_pg3'].rank(method='min', ascending = False)
-    yr_qb['Qb_RaRank3'] = yr_qb['Ra_pg3'].rank(method='min')
-    yr_qb['Qb_RyRank3'] = yr_qb['Ry_pg3'].rank(method='min')
-    yr_qb['Qb_RyaRank3'] = yr_qb['Rya3'].rank(method='min')
-    yr_qb['Qb_TDrushRank3'] = yr_qb['Rtd_pg3'].rank(method='min')
+    yr_qb['Qb_PcRank3'] = yr_qb.groupby(['Week'])['Pc_pg3'].rank(method='min')
+    yr_qb['Qb_PaRank3'] = yr_qb.groupby(['Week'])['Pa_pg3'].rank(method='min')
+    yr_qb['Qb_PcpRank3'] = yr_qb.groupby(['Week'])['Pc%3'].rank(method='min')
+    yr_qb['Qb_PyRank3'] = yr_qb.groupby(['Week'])['Py_pg3'].rank(method='min')
+    yr_qb['Qb_PyaRank3'] = yr_qb.groupby(['Week'])['Pya3'].rank(method='min')
+    yr_qb['Qb_TDpRank3'] = yr_qb.groupby(['Week'])['Ptd_pg3'].rank(method='min')
+    yr_qb['Qb_IntRank3'] = yr_qb.groupby(['Week'])['Int_pg3'].rank(method='min', ascending = False)
+    yr_qb['Qb_RaRank3'] = yr_qb.groupby(['Week'])['Ra_pg3'].rank(method='min')
+    yr_qb['Qb_RyRank3'] = yr_qb.groupby(['Week'])['Ry_pg3'].rank(method='min')
+    yr_qb['Qb_RyaRank3'] = yr_qb.groupby(['Week'])['Rya3'].rank(method='min')
+    yr_qb['Qb_TDrushRank3'] = yr_qb.groupby(['Week'])['Rtd_pg3'].rank(method='min')
+    
     yr_qb['Qb_DKPts3'] = (yr_qb['Ry3'] * .1 + yr_qb['TDrush3'] * 6 +\
                            yr_qb['Py3'] * .04 + yr_qb['TDpass3'] * 4 +\
                            yr_qb['Int3'] * -1 + yr_qb['FumLost3'] * -1) / yr_qb['Games3']
 
-    yr_qb['Qb_DKPtsRank3'] = yr_qb['Qb_DKPts3'].rank(method='min', ascending = False)
+    yr_qb['Qb_DKPtsRank3'] = yr_qb.groupby(['Week'])['Qb_DKPts3'].rank(method='min', ascending = False)
     
     
     yr_qb['Games'] = yr_qb.groupby(['PlayerID'])['Played'].transform(lambda x: x.shift().sum())
@@ -148,21 +149,21 @@ for yr in range(2002, 2021):
 
     def_yr_qb = def_yr_qb.fillna(0)
     
-    def_yr_qb['def_Qb_PcRank3'] = def_yr_qb['def_Pc_pg3'].rank(method='min')
-    def_yr_qb['def_Qb_PaRank3'] = def_yr_qb['def_Pa_pg3'].rank(method='min')
-    def_yr_qb['def_Qb_PcpRank3'] = def_yr_qb['def_Pc%3'].rank(method='min')
-    def_yr_qb['def_Qb_PyRank3'] = def_yr_qb['def_Py_pg3'].rank(method='min')
-    def_yr_qb['def_Qb_PyaRank3'] = def_yr_qb['def_Pya3'].rank(method='min')
-    def_yr_qb['def_Qb_TDpRank3'] = def_yr_qb['def_Ptd_pg3'].rank(method='min')
-    def_yr_qb['def_Qb_IntRank3'] = def_yr_qb['def_Int_pg3'].rank(method='min', ascending = False)
-    def_yr_qb['def_Qb_RaRank3'] = def_yr_qb['def_Ra_pg3'].rank(method='min')
-    def_yr_qb['def_Qb_RyRank3'] = def_yr_qb['def_Ry_pg3'].rank(method='min')
-    def_yr_qb['def_Qb_RyaRank3'] = def_yr_qb['def_Rya3'].rank(method='min')
-    def_yr_qb['def_Qb_TDrushRank3'] = def_yr_qb['def_Rtd_pg3'].rank(method='min')
+    def_yr_qb['def_Qb_PcRank3'] = def_yr_qb.groupby(['Week'])['def_Pc_pg3'].rank(method='min')
+    def_yr_qb['def_Qb_PaRank3'] = def_yr_qb.groupby(['Week'])['def_Pa_pg3'].rank(method='min')
+    def_yr_qb['def_Qb_PcpRank3'] = def_yr_qb.groupby(['Week'])['def_Pc%3'].rank(method='min')
+    def_yr_qb['def_Qb_PyRank3'] = def_yr_qb.groupby(['Week'])['def_Py_pg3'].rank(method='min')
+    def_yr_qb['def_Qb_PyaRank3'] = def_yr_qb.groupby(['Week'])['def_Pya3'].rank(method='min')
+    def_yr_qb['def_Qb_TDpRank3'] = def_yr_qb.groupby(['Week'])['def_Ptd_pg3'].rank(method='min')
+    def_yr_qb['def_Qb_IntRank3'] = def_yr_qb.groupby(['Week'])['def_Int_pg3'].rank(method='min', ascending = False)
+    def_yr_qb['def_Qb_RaRank3'] = def_yr_qb.groupby(['Week'])['def_Ra_pg3'].rank(method='min')
+    def_yr_qb['def_Qb_RyRank3'] = def_yr_qb.groupby(['Week'])['def_Ry_pg3'].rank(method='min')
+    def_yr_qb['def_Qb_RyaRank3'] = def_yr_qb.groupby(['Week'])['def_Rya3'].rank(method='min')
+    def_yr_qb['def_Qb_TDrushRank3'] = def_yr_qb.groupby(['Week'])['def_Rtd_pg3'].rank(method='min')
     def_yr_qb['def_Qb_DKPts3'] = (def_yr_qb['def_Ry3'] * .1 + def_yr_qb['def_TDrush3'] * 6 +\
                            def_yr_qb['def_Py3'] * .04 + def_yr_qb['def_TDpass3'] * 4 +\
                            def_yr_qb['def_Int3'] * -1 + def_yr_qb['def_FumLost3'] * -1) / def_yr_qb['def_Games3']
-    def_yr_qb['def_Qb_DKPtsRank3'] = def_yr_qb['def_Qb_DKPts3'].rank(method='min', ascending = False)
+    def_yr_qb['def_Qb_DKPtsRank3'] = def_yr_qb.groupby(['Week'])['def_Qb_DKPts3'].rank(method='min', ascending = False)
         
     def_yr_qb['def_Pc'] = def_yr_qb.groupby(['Opponent'])['PassingCompletions'].transform(lambda x: x.shift().sum())
     def_yr_qb['def_Pc_pg'] = def_yr_qb.groupby(['Opponent'])['PassingCompletions'].transform(lambda x: x.shift().mean())
@@ -200,6 +201,7 @@ for yr in range(2002, 2021):
     def_yr_qb['def_Qb_RyRank'] = def_yr_qb.groupby(['Week'])['def_Ry_pg'].rank(method='min')
     def_yr_qb['def_Qb_RyaRank'] = def_yr_qb.groupby(['Week'])['def_Rya'].rank(method='min')
     def_yr_qb['def_Qb_TDrushRank'] = def_yr_qb.groupby(['Week'])['def_Rtd_pg'].rank(method='min')
+    
     def_yr_qb['def_Qb_DKPts'] = (def_yr_qb['def_Ry'] * .1 + def_yr_qb['def_TDrush'] * 6 +\
                            def_yr_qb['def_Py'] * .04 + def_yr_qb['def_TDpass'] * 4 +\
                            def_yr_qb['def_Int'] * -1 + def_yr_qb['def_FumLost'] * -1)
@@ -243,23 +245,23 @@ for yr in range(2002, 2021):
     yr_rb['Fum_pg3'] = yr_rb.groupby(['PlayerID'])['FumblesLost'].transform(lambda x: x.shift().rolling(3).mean())
     yr_rb = yr_rb.fillna(0)
 
-    yr_rb['Rb_RaRank3'] = yr_rb['Ra_pg3'].rank(method='min')
-    yr_rb['Rb_RyRank3'] = yr_rb['Ry_pg3'].rank(method='min')
-    yr_rb['Rb_RyaRank3'] = yr_rb['Rya3'].rank(method='min')
-    yr_rb['Rb_TDrushRank3'] = yr_rb['Rtd_pg3'].rank(method='min')
-    yr_rb['Rb_RecRank3'] = yr_rb['Rec_pg3'].rank(method='min')
-    yr_rb['Rb_TgtRank3'] = yr_rb['Tgt_pg3'].rank(method='min')
-    yr_rb['Rb_RecyRank3'] = yr_rb['Recy_pg3'].rank(method='min')
-    yr_rb['Rb_Rec%Rank3'] = yr_rb['Rec%3'].rank(method='min')
-    yr_rb['Rb_TDrecRank3'] = yr_rb['Rectd_pg3'].rank(method='min')
-    yr_rb['Rb_YdsPerTgtRank3'] = yr_rb['YdsPerTgt3'].rank(method='min')
-    yr_rb['Rb_YdsPerRecRank3'] = yr_rb['YdsPerRec3'].rank(method='min')
-    yr_rb['Rb_FumRank3'] = yr_rb['Fum_pg3'].rank(method='min')        
+    yr_rb['Rb_RaRank3'] = yr_rb.groupby(['Week'])['Ra_pg3'].rank(method='min')
+    yr_rb['Rb_RyRank3'] = yr_rb.groupby(['Week'])['Ry_pg3'].rank(method='min')
+    yr_rb['Rb_RyaRank3'] = yr_rb.groupby(['Week'])['Rya3'].rank(method='min')
+    yr_rb['Rb_TDrushRank3'] = yr_rb.groupby(['Week'])['Rtd_pg3'].rank(method='min')
+    yr_rb['Rb_RecRank3'] = yr_rb.groupby(['Week'])['Rec_pg3'].rank(method='min')
+    yr_rb['Rb_TgtRank3'] = yr_rb.groupby(['Week'])['Tgt_pg3'].rank(method='min')
+    yr_rb['Rb_RecyRank3'] = yr_rb.groupby(['Week'])['Recy_pg3'].rank(method='min')
+    yr_rb['Rb_Rec%Rank3'] = yr_rb.groupby(['Week'])['Rec%3'].rank(method='min')
+    yr_rb['Rb_TDrecRank3'] = yr_rb.groupby(['Week'])['Rectd_pg3'].rank(method='min')
+    yr_rb['Rb_YdsPerTgtRank3'] = yr_rb.groupby(['Week'])['YdsPerTgt3'].rank(method='min')
+    yr_rb['Rb_YdsPerRecRank3'] = yr_rb.groupby(['Week'])['YdsPerRec3'].rank(method='min')
+    yr_rb['Rb_FumRank3'] = yr_rb.groupby(['Week'])['Fum_pg3'].rank(method='min')        
     yr_rb['Rb_DKPts3'] =  (yr_rb['Ry3'] * .1 + yr_rb['TDrush3'] * 6 +\
                            yr_rb['Rec3'] * 1 + yr_rb['TDrec3'] * 6 +\
                            yr_rb['Recy3'] * .1 + yr_rb['FumLost3'] * -1) / yr_rb['Games3']
                               
-    yr_rb['Rb_DKPtsRank3'] = yr_rb['Rb_DKPts3'].rank(method='min', ascending = False)
+    yr_rb['Rb_DKPtsRank3'] = yr_rb.groupby(['Week'])['Rb_DKPts3'].rank(method='min', ascending = False)
     
     yr_rb['Games'] = yr_rb.groupby(['PlayerID'])['Played'].transform(lambda x: x.shift().sum())
     yr_rb['Ra'] = yr_rb.groupby(['PlayerID'])['RushingAttempts'].transform(lambda x: x.shift().sum())
@@ -297,7 +299,8 @@ for yr in range(2002, 2021):
     yr_rb['Rb_TDrecRank'] = yr_rb.groupby(['Week'])['Rectd_pg'].rank(method='min')
     yr_rb['Rb_YdsPerTgtRank'] = yr_rb.groupby(['Week'])['YdsPerTgt'].rank(method='min')
     yr_rb['Rb_YdsPerRecRank'] = yr_rb.groupby(['Week'])['YdsPerRec'].rank(method='min')
-    yr_rb['Rb_FumRank'] = yr_rb.groupby(['Week'])['Fum_pg'].rank(method='min')        
+    yr_rb['Rb_FumRank'] = yr_rb.groupby(['Week'])['Fum_pg'].rank(method='min') 
+       
     yr_rb['Rb_DKPts'] = (yr_rb['Ry'] * .1 + yr_rb['TDrush'] * 6 +\
                          yr_rb['Rec'] * 1 + yr_rb['TDrec'] * 6 +\
                          yr_rb['Recy'] * .1 + yr_rb['FumLost'] * -1)        
@@ -340,23 +343,24 @@ for yr in range(2002, 2021):
     def_yr_rb['def_Fum_pg3'] = def_yr_rb.groupby(['Opponent'])['FumblesLost'].transform(lambda x: x.shift().rolling(3).mean())
     def_yr_rb = def_yr_rb.fillna(0)
 
-    def_yr_rb['def_Rb_RaRank3'] = def_yr_rb['def_Ra_pg3'].rank(method='min')
-    def_yr_rb['def_Rb_RyRank3'] = def_yr_rb['def_Ry_pg3'].rank(method='min')
-    def_yr_rb['def_Rb_RyaRank3'] = def_yr_rb['def_Rya3'].rank(method='min')
-    def_yr_rb['def_Rb_TDrushRank3'] = def_yr_rb['def_Rtd_pg3'].rank(method='min')
-    def_yr_rb['def_Rb_RecRank3'] = def_yr_rb['def_Rec_pg3'].rank(method='min')
-    def_yr_rb['def_Rb_TgtRank3'] = def_yr_rb['def_Tgt_pg3'].rank(method='min')
-    def_yr_rb['def_Rb_RecyRank3'] = def_yr_rb['def_Recy_pg3'].rank(method='min')
-    def_yr_rb['def_Rb_Rec%Rank3'] = def_yr_rb['def_Rec%3'].rank(method='min')
-    def_yr_rb['def_Rb_TDrecRank3'] = def_yr_rb['def_Rectd_pg3'].rank(method='min')
-    def_yr_rb['def_Rb_YdsPerTgtRank3'] = def_yr_rb['def_YdsPerTgt3'].rank(method='min')
-    def_yr_rb['def_Rb_YdsPerRecRank3'] = def_yr_rb['def_YdsPerRec3'].rank(method='min')
-    def_yr_rb['def_Rb_FumRank3'] = def_yr_rb['def_Fum_pg3'].rank(method='min')        
+    def_yr_rb['def_Rb_RaRank3'] = def_yr_rb.groupby(['Week'])['def_Ra_pg3'].rank(method='min')
+    def_yr_rb['def_Rb_RyRank3'] = def_yr_rb.groupby(['Week'])['def_Ry_pg3'].rank(method='min')
+    def_yr_rb['def_Rb_RyaRank3'] = def_yr_rb.groupby(['Week'])['def_Rya3'].rank(method='min')
+    def_yr_rb['def_Rb_TDrushRank3'] = def_yr_rb.groupby(['Week'])['def_Rtd_pg3'].rank(method='min')
+    def_yr_rb['def_Rb_RecRank3'] = def_yr_rb.groupby(['Week'])['def_Rec_pg3'].rank(method='min')
+    def_yr_rb['def_Rb_TgtRank3'] = def_yr_rb.groupby(['Week'])['def_Tgt_pg3'].rank(method='min')
+    def_yr_rb['def_Rb_RecyRank3'] = def_yr_rb.groupby(['Week'])['def_Recy_pg3'].rank(method='min')
+    def_yr_rb['def_Rb_Rec%Rank3'] = def_yr_rb.groupby(['Week'])['def_Rec%3'].rank(method='min')
+    def_yr_rb['def_Rb_TDrecRank3'] = def_yr_rb.groupby(['Week'])['def_Rectd_pg3'].rank(method='min')
+    def_yr_rb['def_Rb_YdsPerTgtRank3'] = def_yr_rb.groupby(['Week'])['def_YdsPerTgt3'].rank(method='min')
+    def_yr_rb['def_Rb_YdsPerRecRank3'] = def_yr_rb.groupby(['Week'])['def_YdsPerRec3'].rank(method='min')
+    def_yr_rb['def_Rb_FumRank3'] = def_yr_rb.groupby(['Week'])['def_Fum_pg3'].rank(method='min')     
+    
     def_yr_rb['def_Rb_DKPts3'] =  (def_yr_rb['def_Ry3'] * .1 + def_yr_rb['def_TDrush3'] * 6 +\
                            def_yr_rb['def_Rec3'] * 1 + def_yr_rb['def_TDrec3'] * 6 +\
                            def_yr_rb['def_Recy3'] * .1 + def_yr_rb['def_FumLost3'] * -1) / def_yr_rb['def_Games3'] 
                               
-    def_yr_rb['def_Rb_DKPtsRank3'] = def_yr_rb['def_Rb_DKPts3'].rank(method='min', ascending = False)
+    def_yr_rb['def_Rb_DKPtsRank3'] = def_yr_rb.groupby(['Week'])['def_Rb_DKPts3'].rank(method='min', ascending = False)
     
     def_yr_rb['def_Games'] = def_yr_rb.groupby(['Opponent'])['Played'].transform(lambda x: x.shift().sum())
     def_yr_rb['def_Ra'] = def_yr_rb.groupby(['Opponent'])['RushingAttempts'].transform(lambda x: x.shift().sum())
@@ -436,23 +440,24 @@ for yr in range(2002, 2021):
     yr_wr['Fum_pg3'] = yr_wr.groupby(['PlayerID'])['FumblesLost'].transform(lambda x: x.shift().rolling(3).mean())
     yr_wr = yr_wr.fillna(0)
 
-    yr_wr['Wr_RaRank3'] = yr_wr['Ra_pg3'].rank(method='min')
-    yr_wr['Wr_RyRank3'] = yr_wr['Ry_pg3'].rank(method='min')
-    yr_wr['Wr_RyaRank3'] = yr_wr['Rya3'].rank(method='min')
-    yr_wr['Wr_TDrushRank3'] = yr_wr['Rtd_pg3'].rank(method='min')
-    yr_wr['Wr_RecRank3'] = yr_wr['Rec_pg3'].rank(method='min')
-    yr_wr['Wr_TgtRank3'] = yr_wr['Tgt_pg3'].rank(method='min')
-    yr_wr['Wr_RecyRank3'] = yr_wr['Recy_pg3'].rank(method='min')
-    yr_wr['Wr_Rec%Rank3'] = yr_wr['Rec%3'].rank(method='min')
-    yr_wr['Wr_TDrecRank3'] = yr_wr['Rectd_pg3'].rank(method='min')
-    yr_wr['Wr_YdsPerTgtRank3'] = yr_wr['YdsPerTgt3'].rank(method='min')
-    yr_wr['Wr_YdsPerRecRank3'] = yr_wr['YdsPerRec3'].rank(method='min')
-    yr_wr['Wr_FumRank3'] = yr_wr['Fum_pg3'].rank(method='min')        
+    yr_wr['Wr_RaRank3'] = yr_wr.groupby(['Week'])['Ra_pg3'].rank(method='min')
+    yr_wr['Wr_RyRank3'] = yr_wr.groupby(['Week'])['Ry_pg3'].rank(method='min')
+    yr_wr['Wr_RyaRank3'] = yr_wr.groupby(['Week'])['Rya3'].rank(method='min')
+    yr_wr['Wr_TDrushRank3'] = yr_wr.groupby(['Week'])['Rtd_pg3'].rank(method='min')
+    yr_wr['Wr_RecRank3'] = yr_wr.groupby(['Week'])['Rec_pg3'].rank(method='min')
+    yr_wr['Wr_TgtRank3'] = yr_wr.groupby(['Week'])['Tgt_pg3'].rank(method='min')
+    yr_wr['Wr_RecyRank3'] = yr_wr.groupby(['Week'])['Recy_pg3'].rank(method='min')
+    yr_wr['Wr_Rec%Rank3'] = yr_wr.groupby(['Week'])['Rec%3'].rank(method='min')
+    yr_wr['Wr_TDrecRank3'] = yr_wr.groupby(['Week'])['Rectd_pg3'].rank(method='min')
+    yr_wr['Wr_YdsPerTgtRank3'] = yr_wr.groupby(['Week'])['YdsPerTgt3'].rank(method='min')
+    yr_wr['Wr_YdsPerRecRank3'] = yr_wr.groupby(['Week'])['YdsPerRec3'].rank(method='min')
+    yr_wr['Wr_FumRank3'] = yr_wr.groupby(['Week'])['Fum_pg3'].rank(method='min')     
+    
     yr_wr['Wr_DKPts3'] =  (yr_wr['Ry3'] * .1 + yr_wr['TDrush3'] * 6 +\
                            yr_wr['Rec3'] * 1 + yr_wr['TDrec3'] * 6 +\
                            yr_wr['Recy3'] * .1 + yr_wr['FumLost3'] * -1) / yr_wr['Games3']
                               
-    yr_wr['Wr_DKPtsRank3'] = yr_wr['Wr_DKPts3'].rank(method='min', ascending = False)
+    yr_wr['Wr_DKPtsRank3'] = yr_wr.groupby(['Week'])['Wr_DKPts3'].rank(method='min', ascending = False)
     
     yr_wr['Games'] = yr_wr.groupby(['PlayerID'])['Played'].transform(lambda x: x.shift().sum())
     yr_wr['Ra'] = yr_wr.groupby(['PlayerID'])['RushingAttempts'].transform(lambda x: x.shift().sum())
@@ -534,23 +539,24 @@ for yr in range(2002, 2021):
     def_yr_wr['def_Fum_pg3'] = def_yr_wr.groupby(['Opponent'])['FumblesLost'].transform(lambda x: x.shift().rolling(3).mean())
     def_yr_wr = def_yr_wr.fillna(0)
 
-    def_yr_wr['def_Wr_RaRank3'] = def_yr_wr['def_Ra_pg3'].rank(method='min')
-    def_yr_wr['def_Wr_RyRank3'] = def_yr_wr['def_Ry_pg3'].rank(method='min')
-    def_yr_wr['def_Wr_RyaRank3'] = def_yr_wr['def_Rya3'].rank(method='min')
-    def_yr_wr['def_Wr_TDrushRank3'] = def_yr_wr['def_Rtd_pg3'].rank(method='min')
-    def_yr_wr['def_Wr_RecRank3'] = def_yr_wr['def_Rec_pg3'].rank(method='min')
-    def_yr_wr['def_Wr_TgtRank3'] = def_yr_wr['def_Tgt_pg3'].rank(method='min')
-    def_yr_wr['def_Wr_RecyRank3'] = def_yr_wr['def_Recy_pg3'].rank(method='min')
-    def_yr_wr['def_Wr_Rec%Rank3'] = def_yr_wr['def_Rec%3'].rank(method='min')
-    def_yr_wr['def_Wr_TDrecRank3'] = def_yr_wr['def_Rectd_pg3'].rank(method='min')
-    def_yr_wr['def_Wr_YdsPerTgtRank3'] = def_yr_wr['def_YdsPerTgt3'].rank(method='min')
-    def_yr_wr['def_Wr_YdsPerRecRank3'] = def_yr_wr['def_YdsPerRec3'].rank(method='min')
-    def_yr_wr['def_Wr_FumRank3'] = def_yr_wr['def_Fum_pg3'].rank(method='min')        
+    def_yr_wr['def_Wr_RaRank3'] = def_yr_wr.groupby(['Week'])['def_Ra_pg3'].rank(method='min')
+    def_yr_wr['def_Wr_RyRank3'] = def_yr_wr.groupby(['Week'])['def_Ry_pg3'].rank(method='min')
+    def_yr_wr['def_Wr_RyaRank3'] = def_yr_wr.groupby(['Week'])['def_Rya3'].rank(method='min')
+    def_yr_wr['def_Wr_TDrushRank3'] = def_yr_wr.groupby(['Week'])['def_Rtd_pg3'].rank(method='min')
+    def_yr_wr['def_Wr_RecRank3'] = def_yr_wr.groupby(['Week'])['def_Rec_pg3'].rank(method='min')
+    def_yr_wr['def_Wr_TgtRank3'] = def_yr_wr.groupby(['Week'])['def_Tgt_pg3'].rank(method='min')
+    def_yr_wr['def_Wr_RecyRank3'] = def_yr_wr.groupby(['Week'])['def_Recy_pg3'].rank(method='min')
+    def_yr_wr['def_Wr_Rec%Rank3'] = def_yr_wr.groupby(['Week'])['def_Rec%3'].rank(method='min')
+    def_yr_wr['def_Wr_TDrecRank3'] = def_yr_wr.groupby(['Week'])['def_Rectd_pg3'].rank(method='min')
+    def_yr_wr['def_Wr_YdsPerTgtRank3'] = def_yr_wr.groupby(['Week'])['def_YdsPerTgt3'].rank(method='min')
+    def_yr_wr['def_Wr_YdsPerRecRank3'] = def_yr_wr.groupby(['Week'])['def_YdsPerRec3'].rank(method='min')
+    def_yr_wr['def_Wr_FumRank3'] = def_yr_wr.groupby(['Week'])['def_Fum_pg3'].rank(method='min')   
+    
     def_yr_wr['def_Wr_DKPts3'] =  (def_yr_wr['def_Ry3'] * .1 + def_yr_wr['def_TDrush3'] * 6 +\
                            def_yr_wr['def_Rec3'] * 1 + def_yr_wr['def_TDrec3'] * 6 +\
                            def_yr_wr['def_Recy3'] * .1 + def_yr_wr['def_FumLost3'] * -1) / def_yr_wr['def_Games3'] 
                               
-    def_yr_wr['def_Wr_DKPtsRank3'] = def_yr_wr['def_Wr_DKPts3'].rank(method='min', ascending = False)
+    def_yr_wr['def_Wr_DKPtsRank3'] = def_yr_wr.groupby(['Week'])['def_Wr_DKPts3'].rank(method='min', ascending = False)
     
     def_yr_wr['def_Games'] = def_yr_wr.groupby(['Opponent'])['Played'].transform(lambda x: x.shift().sum())
     def_yr_wr['def_Ra'] = def_yr_wr.groupby(['Opponent'])['RushingAttempts'].transform(lambda x: x.shift().sum())
@@ -632,23 +638,23 @@ for yr in range(2002, 2021):
     yr_te['Fum_pg3'] = yr_te.groupby(['PlayerID'])['FumblesLost'].transform(lambda x: x.shift().rolling(3).mean())
     yr_te = yr_te.fillna(0)
 
-    yr_te['Te_RaRank3'] = yr_te['Ra_pg3'].rank(method='min')
-    yr_te['Te_RyRank3'] = yr_te['Ry_pg3'].rank(method='min')
-    yr_te['Te_RyaRank3'] = yr_te['Rya3'].rank(method='min')
-    yr_te['Te_TDrushRank3'] = yr_te['Rtd_pg3'].rank(method='min')
-    yr_te['Te_RecRank3'] = yr_te['Rec_pg3'].rank(method='min')
-    yr_te['Te_TgtRank3'] = yr_te['Tgt_pg3'].rank(method='min')
-    yr_te['Te_RecyRank3'] = yr_te['Recy_pg3'].rank(method='min')
-    yr_te['Te_Rec%Rank3'] = yr_te['Rec%3'].rank(method='min')
-    yr_te['Te_TDrecRank3'] = yr_te['Rectd_pg3'].rank(method='min')
-    yr_te['Te_YdsPerTgtRank3'] = yr_te['YdsPerTgt3'].rank(method='min')
-    yr_te['Te_YdsPerRecRank3'] = yr_te['YdsPerRec3'].rank(method='min')
-    yr_te['Te_FumRank3'] = yr_te['Fum_pg3'].rank(method='min')        
+    yr_te['Te_RaRank3'] = yr_te.groupby(['Week'])['Ra_pg3'].rank(method='min')
+    yr_te['Te_RyRank3'] = yr_te.groupby(['Week'])['Ry_pg3'].rank(method='min')
+    yr_te['Te_RyaRank3'] = yr_te.groupby(['Week'])['Rya3'].rank(method='min')
+    yr_te['Te_TDrushRank3'] = yr_te.groupby(['Week'])['Rtd_pg3'].rank(method='min')
+    yr_te['Te_RecRank3'] = yr_te.groupby(['Week'])['Rec_pg3'].rank(method='min')
+    yr_te['Te_TgtRank3'] = yr_te.groupby(['Week'])['Tgt_pg3'].rank(method='min')
+    yr_te['Te_RecyRank3'] = yr_te.groupby(['Week'])['Recy_pg3'].rank(method='min')
+    yr_te['Te_Rec%Rank3'] = yr_te.groupby(['Week'])['Rec%3'].rank(method='min')
+    yr_te['Te_TDrecRank3'] = yr_te.groupby(['Week'])['Rectd_pg3'].rank(method='min')
+    yr_te['Te_YdsPerTgtRank3'] = yr_te.groupby(['Week'])['YdsPerTgt3'].rank(method='min')
+    yr_te['Te_YdsPerRecRank3'] = yr_te.groupby(['Week'])['YdsPerRec3'].rank(method='min')
+    yr_te['Te_FumRank3'] = yr_te.groupby(['Week'])['Fum_pg3'].rank(method='min')        
     yr_te['Te_DKPts3'] =  (yr_te['Ry3'] * .1 + yr_te['TDrush3'] * 6 +\
                            yr_te['Rec3'] * 1 + yr_te['TDrec3'] * 6 +\
                            yr_te['Recy3'] * .1 + yr_te['FumLost3'] * -1) / yr_te['Games3']
                               
-    yr_te['Te_DKPtsRank3'] = yr_te['Te_DKPts3'].rank(method='min', ascending = False)
+    yr_te['Te_DKPtsRank3'] = yr_te.groupby(['Week'])['Te_DKPts3'].rank(method='min', ascending = False)
     
     yr_te['Games'] = yr_te.groupby(['PlayerID'])['Played'].transform(lambda x: x.shift().sum())
     yr_te['Ra'] = yr_te.groupby(['PlayerID'])['RushingAttempts'].transform(lambda x: x.shift().sum())
@@ -731,23 +737,24 @@ for yr in range(2002, 2021):
     def_yr_te['def_Fum_pg3'] = def_yr_te.groupby(['Opponent'])['FumblesLost'].transform(lambda x: x.shift().rolling(3).mean())
     def_yr_te = def_yr_te.fillna(0)
 
-    def_yr_te['def_Te_RaRank3'] = def_yr_te['def_Ra_pg3'].rank(method='min')
-    def_yr_te['def_Te_RyRank3'] = def_yr_te['def_Ry_pg3'].rank(method='min')
-    def_yr_te['def_Te_RyaRank3'] = def_yr_te['def_Rya3'].rank(method='min')
-    def_yr_te['def_Te_TDrushRank3'] = def_yr_te['def_Rtd_pg3'].rank(method='min')
-    def_yr_te['def_Te_RecRank3'] = def_yr_te['def_Rec_pg3'].rank(method='min')
-    def_yr_te['def_Te_TgtRank3'] = def_yr_te['def_Tgt_pg3'].rank(method='min')
-    def_yr_te['def_Te_RecyRank3'] = def_yr_te['def_Recy_pg3'].rank(method='min')
-    def_yr_te['def_Te_Rec%Rank3'] = def_yr_te['def_Rec%3'].rank(method='min')
-    def_yr_te['def_Te_TDrecRank3'] = def_yr_te['def_Rectd_pg3'].rank(method='min')
-    def_yr_te['def_Te_YdsPerTgtRank3'] = def_yr_te['def_YdsPerTgt3'].rank(method='min')
-    def_yr_te['def_Te_YdsPerRecRank3'] = def_yr_te['def_YdsPerRec3'].rank(method='min')
-    def_yr_te['def_Te_FumRank3'] = def_yr_te['def_Fum_pg3'].rank(method='min')        
+    def_yr_te['def_Te_RaRank3'] = def_yr_te.groupby(['Week'])['def_Ra_pg3'].rank(method='min')
+    def_yr_te['def_Te_RyRank3'] = def_yr_te.groupby(['Week'])['def_Ry_pg3'].rank(method='min')
+    def_yr_te['def_Te_RyaRank3'] = def_yr_te.groupby(['Week'])['def_Rya3'].rank(method='min')
+    def_yr_te['def_Te_TDrushRank3'] = def_yr_te.groupby(['Week'])['def_Rtd_pg3'].rank(method='min')
+    def_yr_te['def_Te_RecRank3'] = def_yr_te.groupby(['Week'])['def_Rec_pg3'].rank(method='min')
+    def_yr_te['def_Te_TgtRank3'] = def_yr_te.groupby(['Week'])['def_Tgt_pg3'].rank(method='min')
+    def_yr_te['def_Te_RecyRank3'] = def_yr_te.groupby(['Week'])['def_Recy_pg3'].rank(method='min')
+    def_yr_te['def_Te_Rec%Rank3'] = def_yr_te.groupby(['Week'])['def_Rec%3'].rank(method='min')
+    def_yr_te['def_Te_TDrecRank3'] = def_yr_te.groupby(['Week'])['def_Rectd_pg3'].rank(method='min')
+    def_yr_te['def_Te_YdsPerTgtRank3'] = def_yr_te.groupby(['Week'])['def_YdsPerTgt3'].rank(method='min')
+    def_yr_te['def_Te_YdsPerRecRank3'] = def_yr_te.groupby(['Week'])['def_YdsPerRec3'].rank(method='min')
+    def_yr_te['def_Te_FumRank3'] = def_yr_te.groupby(['Week'])['def_Fum_pg3'].rank(method='min')   
+     
     def_yr_te['def_Te_DKPts3'] =  (def_yr_te['def_Ry3'] * .1 + def_yr_te['def_TDrush3'] * 6 +\
                            def_yr_te['def_Rec3'] * 1 + def_yr_te['def_TDrec3'] * 6 +\
                            def_yr_te['def_Recy3'] * .1 + def_yr_te['def_FumLost3'] * -1) / def_yr_te['def_Games3'] 
                               
-    def_yr_te['def_Te_DKPtsRank3'] = def_yr_te['def_Te_DKPts3'].rank(method='min', ascending = False)
+    def_yr_te['def_Te_DKPtsRank3'] = def_yr_te.groupby(['Week'])['def_Te_DKPts3'].rank(method='min', ascending = False)
     
     def_yr_te['def_Games'] = def_yr_te.groupby(['Opponent'])['Played'].transform(lambda x: x.shift().sum())
     def_yr_te['def_Ra'] = def_yr_te.groupby(['Opponent'])['RushingAttempts'].transform(lambda x: x.shift().sum())
