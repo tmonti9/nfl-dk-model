@@ -112,8 +112,7 @@ for yr in range(2002, 2021):
     yr_qb['Qb_DKPtsRank'] = yr_qb['Qb_DKPts'].rank(method='min', ascending = False)  
     qb_yr_dfs.append(yr_qb)
     
-qb_stats = pd.concat(qb_yr_dfs).drop_duplicates().reset_index(drop=True)
-qb_stats_all = pd.merge(qb_stats, player_stats[['Season','PlayerID','Team','Name']].drop_duplicates(), how = 'left', on = ['Season','PlayerID'])
+qb_stats_all = pd.concat(qb_yr_dfs).drop_duplicates().reset_index(drop=True)
 qb_stats_all.to_csv(etl_dir + 'qb_stats.csv')
 
 
@@ -307,8 +306,7 @@ for yr in range(2002, 2021):
     yr_rb['Rb_DKPtsRank'] = yr_rb.groupby(['Week'])['Rb_DKPts'].rank(method='min', ascending = False)
     rb_yr_dfs.append(yr_rb)
     
-rb_stats = pd.concat(rb_yr_dfs).drop_duplicates().reset_index(drop=True)
-rb_stats_all = pd.merge(rb_stats, player_stats[['Season','PlayerID','Team','Name']].drop_duplicates(), how = 'left', on = ['Season','PlayerID'])
+rb_stats_all = pd.concat(rb_yr_dfs).drop_duplicates().reset_index(drop=True)
 rb_stats_all.to_csv(etl_dir + 'rb_stats.csv')
 
 
@@ -503,8 +501,7 @@ for yr in range(2002, 2021):
     
     wr_yr_dfs.append(yr_wr)
 
-wr_stats = pd.concat(rb_yr_dfs).drop_duplicates().reset_index(drop=True)
-wr_stats_all = pd.merge(wr_stats, player_stats[['Season','PlayerID','Team','Name']].drop_duplicates(), how = 'left', on = ['Season','PlayerID'])
+wr_stats_all = pd.concat(rb_yr_dfs).drop_duplicates().reset_index(drop=True)
 wr_stats_all.to_csv(etl_dir + 'wr_stats.csv')
 
 
@@ -700,8 +697,7 @@ for yr in range(2002, 2021):
     
     te_yr_dfs.append(yr_te)
 
-te_stats = pd.concat(rb_yr_dfs).drop_duplicates().reset_index(drop=True)
-te_stats_all = pd.merge(te_stats, player_stats[['Season','PlayerID','Team','Name']].drop_duplicates(), how = 'left', on = ['Season','PlayerID'])
+te_stats_all = pd.concat(rb_yr_dfs).drop_duplicates().reset_index(drop=True)
 te_stats_all.to_csv(etl_dir + 'te_stats.csv')
 
 
