@@ -709,7 +709,7 @@ te_stats_all.to_csv(etl_dir + 'te_stats.csv')
 """ DEFENSE TIGHT ENDS """
 def_te_yr_dfs = []
 for yr in range(2002, 2021): 
-    def_yr_te = player_stats[(player_stats['Season']==yr) & (player_stats['Position']=='WR')].copy().reset_index(drop=True)
+    def_yr_te = player_stats[(player_stats['Season']==yr) & (player_stats['Position']=='TE')].copy().reset_index(drop=True)
     def_yr_te.sort_values(['PlayerID', 'Week'], ascending = [True, True], inplace = True)
     
     def_yr_te['def_Games3'] = def_yr_te.groupby(['Opponent'])['Played'].transform(lambda x: x.shift().rolling(3).sum())
