@@ -11,11 +11,6 @@ from lightgbm import LGBMRegressor
 working_directory = 'C:/Users/'
 data_dir = 'Data/'
 etl_dir = 'Data/ETL'
-
-
-working_directory = 'C:/Users/Administrator/Documents/AnalysisProjects/NFLdb/'
-data_dir = 'Data/FantasyData/'
-etl_dir = 'Data/FantasyData/GStats/'
 os.chdir(working_directory)
 
 
